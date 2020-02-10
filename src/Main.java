@@ -64,7 +64,7 @@ public class Main {
                     break;
                 case 5:
                     students = controller.readStudentFromFile("hocvien.txt");
-                    String mailFormat = "^[a-zA-Z]+[a-zA-Z0-9]*@{1}\\w+mail.com$";
+                    String mailFormat = "^ [a-zA-Z]+[a-zA-Z0-9]*@{1}\\w+mail.com$";
                     Pattern patternMail = Pattern.compile(mailFormat);
                     Matcher matcherMail;
 
@@ -82,28 +82,121 @@ public class Main {
                     Collections.sort(students, new Comparator<Student>() {
                         @Override
                         public int compare(Student student1, Student student2) {
-                            if (student1.getMark()<student2.getMark()) return 1;
+                            if (student1.getMark() < student2.getMark()) return 1;
                             return -1;
                         }
                     });
 
                     for (Student std :
                             students) {
-                        System.out.println(std.getStudentID() + "\t" + std.getFullName() + "\t" + std.getEmail() + "\t"+ std.getMark());
+                        System.out.println(std.getStudentID() + "\t" + std.getFullName() + "\t" + std.getEmail() + "\t" + std.getMark());
                     }
                     System.out.println();
                     break;
                 case 7:
+                    students = controller.readStudentFromFile("hocvien.txt");
+                    Collections.sort(students, new Comparator<Student>() {
+                        @Override
+                        public int compare(Student student1, Student student2) {
+                            if (student1.getMark() < student2.getMark()) return 1;
+                            return -1;
+                        }
+                    });
+
+                    for (Student std :
+                            students) {
+                        System.out.println(std.getStudentID() + "\t" + std.getFullName() + "\t" + std.getEmail() + "\t" + std.getMark());
+                        controller.writeToFile(std, "sapxepdiem.txt");
+                    }
+                    System.out.println();
+
                     break;
                 case 8:
+                    students = controller.readStudentFromFile("hocvien.txt");
+
+                    List<String> firstName=new ArrayList<>();
+                    List<String> familyName=new ArrayList<>();
+
+                    
+
+                    Collections.sort(students, new Comparator<Student>() {
+                        @Override
+                        public int compare(Student student1, Student student2) {
+                            if (student1.getMark() < student2.getMark()) return 1;
+                            return -1;
+                        }
+                    });
+
                     break;
                 case 9:
                     break;
                 case 10:
+                    students = controller.readStudentFromFile("hocvien.txt");
+
+                    String stdID, stdFullName, stdEmail;
+                    int stdMark;
+
+                    System.out.println("Input student ID: ");
+                    stdID = scanner.nextLine();
+
+                    System.out.println("Input student full name: ");
+                    stdFullName = scanner.nextLine();
+
+                    System.out.println("Input student email: ");
+                    stdEmail = scanner.nextLine();
+
+                    System.out.println("Input student mark: ");
+                    stdMark = Integer.parseInt(scanner.nextLine());
+
+                    students.add(new Student(stdID, stdFullName, stdEmail, stdMark));
+
+                    for (Student std :
+                            students) {
+                        System.out.println(std.toString());
+                    }
                     break;
                 case 11:
+
+                    System.out.println("Input ID you want to edit: ");
+                    String wantEditID = scanner.nextLine();
+
+                    students = controller.readStudentFromFile("hocvien.txt");
+                    for (Student std :
+                            students) {
+                       if (std.getStudentID().equalsIgnoreCase(wantEditID)){
+                           System.out.println("Input student full name: ");
+                           std.setFullName(scanner.nextLine());
+
+                           System.out.println("Input student email: ");
+                          std.setEmail(scanner.nextLine());
+
+                           System.out.println("Input student mark: ");
+                           std.setMark(Integer.parseInt(scanner.nextLine()));
+
+                           break;
+                       }
+                    }
+                    for (Student std :
+                            students) {
+                        System.out.println(std.toString());
+                    }
                     break;
                 case 12:
+                    System.out.println("Input ID you want to delete: ");
+                    String wantDeleteID = scanner.nextLine();
+
+                    students = controller.readStudentFromFile("hocvien.txt");
+                    for (Student std :
+                            students) {
+                        if (std.getStudentID().equalsIgnoreCase(wantDeleteID)){
+                            students.remove(std);
+                            break;
+                        }
+                    }
+                    for (Student std :
+                            students) {
+                        System.out.println(std.toString());
+                    }
                     break;
                 case 13:
                     System.out.println("Goodbye!");

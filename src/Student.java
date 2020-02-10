@@ -1,8 +1,12 @@
+import java.util.Scanner;
+
 public class Student {
     private String studentID;
     private String fullName;
     private String email;
     private int mark;
+
+    Scanner scanner=new Scanner(System.in);
 
     public Student() {
     }
@@ -12,6 +16,20 @@ public class Student {
         this.fullName = fullName;
         this.email = email;
         this.mark = mark;
+    }
+
+    public void edit(){
+        String stdID, stdFullName, stdEmail;
+        int stdMark;
+
+        System.out.println("Input student full name: ");
+        stdFullName = scanner.nextLine();
+
+        System.out.println("Input student email: ");
+        stdEmail = scanner.nextLine();
+
+        System.out.println("Input student mark: ");
+        stdMark = Integer.parseInt(scanner.nextLine());
     }
 
     @Override
